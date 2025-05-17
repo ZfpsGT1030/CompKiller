@@ -170,6 +170,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            font-size: 10px;
         }
 
         .toggle {
@@ -255,10 +256,107 @@
         .dropdown-arrow {
             font-size: 10px;
         }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #1a1c25;
+            border-radius: 4px;
+            margin-top: 4px;
+            z-index: 10;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dropdown-menu.open {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #212330;
+        }
 
         /* Additional panel styling */
         .global-overrides {
             margin-top: 20px;
+        }
+        
+        /* Modal styling */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+        
+        .modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: #12141c;
+            border-radius: 8px;
+            width: 300px;
+            padding: 20px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #1e2029;
+        }
+        
+        .modal-title {
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .modal-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        
+        .modal-footer {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #1e2029;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .modal-button {
+            background-color: #00a2ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -339,7 +437,7 @@
                 <div class="config-item">
                     <div class="config-name">Enabled</div>
                     <div class="config-settings">
-                        <div class="settings-icon">⚙️</div>
+                        <div class="settings-icon">⚙</div>
                         <div class="toggle active">
                             <div class="toggle-knob"></div>
                         </div>
@@ -521,11 +619,19 @@
                 <div class="config-item">
                     <div class="config-name">Target Hitboxes</div>
                     <div class="config-settings">
-                        <div class="settings-icon">⚙️</div>
+                        <div class="settings-icon">⚙</div>
                         <div class="dropdown">
                             <div class="dropdown-content">
                                 <div>None</div>
                                 <div class="dropdown-arrow">▼</div>
+                            </div>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">None</div>
+                                <div class="dropdown-item">Head</div>
+                                <div class="dropdown-item">Chest</div>
+                                <div class="dropdown-item">Stomach</div>
+                                <div class="dropdown-item">Arms</div>
+                                <div class="dropdown-item">Legs</div>
                             </div>
                         </div>
                     </div>
@@ -534,11 +640,19 @@
                 <div class="config-item">
                     <div class="config-name">Multipointed Hitboxes</div>
                     <div class="config-settings">
-                        <div class="settings-icon">⚙️</div>
+                        <div class="settings-icon">⚙</div>
                         <div class="dropdown">
                             <div class="dropdown-content">
                                 <div>None</div>
                                 <div class="dropdown-arrow">▼</div>
+                            </div>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">None</div>
+                                <div class="dropdown-item">Head</div>
+                                <div class="dropdown-item">Body</div>
+                                <div class="dropdown-item">Arms</div>
+                                <div class="dropdown-item">Legs</div>
+                                <div class="dropdown-item">All</div>
                             </div>
                         </div>
                     </div>
@@ -564,9 +678,11 @@
             slider.addEventListener('mousedown', function(e) {
                 handleSliderMove(e, slider, sliderHandle, sliderFill);
                 
-                document.addEventListener('mousemove', function moveHandler(e) {
+                function moveHandler(e) {
                     handleSliderMove(e, slider, sliderHandle, sliderFill);
-                });
+                }
+                
+                document.addEventListener('mousemove', moveHandler);
                 
                 document.addEventListener('mouseup', function() {
                     document.removeEventListener('mousemove', moveHandler);
@@ -597,6 +713,148 @@
                     valueDisplay.textContent = `${value}%`;
                 }
             }
+        }
+        
+        // Dropdown functionality
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                // Close all other dropdowns first
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    if (menu !== this.querySelector('.dropdown-menu')) {
+                        menu.classList.remove('open');
+                    }
+                });
+                
+                // If this dropdown has a menu, toggle it
+                const menu = this.querySelector('.dropdown-menu');
+                if (menu) {
+                    menu.classList.toggle('open');
+                    e.stopPropagation();
+                }
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.remove('open');
+            });
+        });
+        
+        // Settings icons functionality (open modals)
+        document.querySelectorAll('.settings-icon').forEach(icon => {
+            icon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                const configName = this.closest('.config-item').querySelector('.config-name').textContent;
+                let modalTitle = configName + ' Settings';
+                let modalContent = '';
+                
+                // Create specific modal content based on which gear icon was clicked
+                if (configName === 'Auto Stop') {
+                    modalContent = `
+                        <div class="modal-option">
+                            <div>Early</div>
+                            <div class="toggle">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                        <div class="modal-option">
+                            <div>Stop</div>
+                            <div class="toggle active">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                        <div class="modal-option">
+                            <div>In Air</div>
+                            <div class="toggle">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    modalContent = `
+                        <div class="modal-option">
+                            <div>Option 1</div>
+                            <div class="toggle">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                        <div class="modal-option">
+                            <div>Option 2</div>
+                            <div class="toggle active">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Create and show modal
+                showModal(modalTitle, modalContent);
+            });
+        });
+        
+        function showModal(title, content) {
+            // Remove any existing modal
+            const existingModal = document.querySelector('.modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Create new modal
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">${title}</div>
+                        <div class="modal-close">×</div>
+                    </div>
+                    <div class="modal-body">
+                        ${content}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-button">Apply</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Show the modal (with animation)
+            setTimeout(() => {
+                modal.classList.add('open');
+            }, 10);
+            
+            // Add event listeners
+            modal.querySelector('.modal-close').addEventListener('click', () => {
+                closeModal(modal);
+            });
+            
+            modal.querySelector('.modal-button').addEventListener('click', () => {
+                closeModal(modal);
+            });
+            
+            // Add toggle functionality to the modal toggles
+            modal.querySelectorAll('.toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+            
+            // Close when clicking outside modal content
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal(modal);
+                }
+            });
+        }
+        
+        function closeModal(modal) {
+            modal.classList.remove('open');
+            setTimeout(() => {
+                modal.remove();
+            }, 200);
         }
     </script>
 </body>
