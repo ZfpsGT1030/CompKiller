@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aim Assist Config</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f1016;
+            color: #b7b8bc;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 60px;
+            background-color: #12141c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 15px;
+            border-right: 1px solid #1e2029;
+        }
+
+        .sidebar-item {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 25px;
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-item.active {
+            opacity: 1;
+            color: #00a2ff;
+        }
+
+        .sidebar-divider {
+            width: 30px;
+            height: 1px;
+            background-color: #1e2029;
+            margin: 5px 0 20px 0;
+        }
+
+        .sidebar-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: #00a2ff;
+            border-radius: 50%;
+            margin-top: auto;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00a2ff;
+            margin-right: 10px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .nav-tab {
+            padding: 8px 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            color: #b7b8bc;
+            position: relative;
+        }
+
+        .nav-tab.active {
+            color: #00a2ff;
+        }
+
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background-color: #00a2ff;
+        }
+
+        .config-panels {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .config-panel {
+            flex: 1;
+            background-color: #12141c;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0 15px 0;
+            border-bottom: 1px solid #1e2029;
+            margin-bottom: 15px;
+        }
+
+        .panel-title {
+            font-weight: 600;
+            color: #7d7e82;
+        }
+
+        .panel-dropdown {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .panel-dropdown::after {
+            content: '▼';
+            font-size: 10px;
+            margin-left: 5px;
+        }
+
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #1e2029;
+        }
+
+        .config-name {
+            display: flex;
+            align-items: center;
+        }
+
+        .config-settings {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .settings-icon {
+            width: 16px;
+            height: 16px;
+            background-color: #2a2d39;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .toggle {
+            position: relative;
+            width: 30px;
+            height: 16px;
+            background-color: #2a2d39;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .toggle.active {
+            background-color: #00a2ff;
+        }
+
+        .toggle-knob {
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: left 0.2s;
+        }
+
+        .toggle.active .toggle-knob {
+            left: 16px;
+        }
+        
+        .slider-container {
+            width: 150px;
+            position: relative;
+        }
+
+        .slider {
+            width: 100%;
+            height: 4px;
+            background-color: #2a2d39;
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .slider-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background-color: #00a2ff;
+            border-radius: 2px;
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: -6px;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translateX(-50%);
+        }
+
+        .text-accent {
+            color: #00a2ff;
+        }
+
+        .dropdown {
+            position: relative;
+            width: 150px;
+            background-color: #1a1c25;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+        }
+
+        /* Additional panel styling */
+        .global-overrides {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M3 12H6M18 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 3V6M12 18V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M17 7V7C17 4.79086 15.2091 3 13 3H11C8.79086 3 7 4.79086 7 7V11H17V7Z" stroke="currentColor" stroke-width="2"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 16L16 12L12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 16L12 12L8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        
+        <div class="sidebar-divider"></div>
+        
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.325 4.317C10.751 2.561 13.249 2.561 13.675 4.317C13.7389 4.5808 13.8642 4.82578 14.0407 5.032C14.2172 5.23822 14.4399 5.39985 14.6907 5.50375C14.9414 5.60764 15.2132 5.65085 15.4838 5.62987C15.7544 5.60889 16.0162 5.5243 16.248 5.383C17.791 4.443 19.558 6.209 18.618 7.753C18.4769 7.98466 18.3924 8.24634 18.3715 8.51677C18.3506 8.78721 18.3938 9.05877 18.4975 9.30938C18.6013 9.55999 18.7627 9.78258 18.9687 9.95905C19.1747 10.1355 19.4194 10.2609 19.683 10.325C21.439 10.751 21.439 13.249 19.683 13.675C19.4192 13.7389 19.1742 13.8642 18.968 14.0407C18.7618 14.2172 18.6001 14.4399 18.4963 14.6907C18.3924 14.9414 18.3491 15.2132 18.3701 15.4838C18.3911 15.7544 18.4757 16.0162 18.617 16.248C19.557 17.791 17.791 19.558 16.247 18.618C16.0153 18.4769 15.7537 18.3924 15.4832 18.3715C15.2128 18.3506 14.9412 18.3938 14.6906 18.4975C14.44 18.6013 14.2174 18.7627 14.0409 18.9687C13.8645 19.1747 13.7391 19.4194 13.675 19.683C13.249 21.439 10.751 21.439 10.325 19.683C10.2611 19.4192 10.1358 19.1742 9.95929 18.968C9.7828 18.7618 9.56011 18.6001 9.30935 18.4963C9.05859 18.3924 8.78683 18.3491 8.51621 18.3701C8.24559 18.3911 7.98375 18.4757 7.752 18.617C6.209 19.557 4.442 17.791 5.382 16.247C5.5231 16.0153 5.60755 15.7537 5.62848 15.4832C5.64942 15.2128 5.60624 14.9412 5.50247 14.6906C5.3987 14.44 5.23726 14.2174 5.03127 14.0409C4.82529 13.8645 4.58056 13.7391 4.317 13.675C2.561 13.249 2.561 10.751 4.317 10.325C4.5808 10.2611 4.82578 10.1358 5.032 9.95929C5.23822 9.7828 5.39985 9.56011 5.50375 9.30935C5.60764 9.05859 5.65085 8.78683 5.62987 8.51621C5.60889 8.24559 5.5243 7.98375 5.383 7.752C4.443 6.209 6.209 4.442 7.753 5.382C8.753 5.99 10.049 5.452 10.325 4.317Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 5H21V19H3V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M3 9H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 8H6C4.89543 8 4 8.89543 4 10V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V10C20 8.89543 19.1046 8 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 8V6C8 4.89543 8.89543 4 10 4H14C15.1046 4 16 4.89543 16 6V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        
+        <div class="sidebar-avatar"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="logo-section">
+            <div class="logo">α</div>
+            <div class="nav-tabs">
+                <div class="nav-tab active">Aim Assist</div>
+                <div class="nav-tab">Anti Aim</div>
+            </div>
+        </div>
+        
+        <div class="config-panels">
+            <div class="config-panel">
+                <div class="panel-header">
+                    <div class="panel-title">General</div>
+                    <div class="panel-dropdown">▼</div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Enabled</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Silent Aim</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Auto Scope</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Force Shoot</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Compensate Spread</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Double Tap</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Duck Peek Assist</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Limit FOV</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Disable Penetration</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="global-overrides">
+                    <div class="panel-header">
+                        <div class="panel-title">Global Overrides</div>
+                        <div class="panel-dropdown">▼</div>
+                    </div>
+                    
+                    <div class="config-item">
+                        <div class="config-name">Override Min. Dmg.</div>
+                        <div class="config-settings">
+                            <div class="settings-icon">⚙️</div>
+                            <div class="toggle active">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-item">
+                        <div class="config-name">Override Hitchance</div>
+                        <div class="config-settings">
+                            <div class="settings-icon">⚙️</div>
+                            <div class="toggle active">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-item">
+                        <div class="config-name">Override Hitboxes</div>
+                        <div class="config-settings">
+                            <div class="settings-icon">⚙️</div>
+                            <div class="toggle active">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="config-panel">
+                <div class="panel-header">
+                    <div class="panel-title">Weapon Selection</div>
+                    <div class="panel-dropdown">▼</div>
+                </div>
+                
+                <div class="dropdown">
+                    <div class="dropdown-content">
+                        <div>General</div>
+                        <div class="dropdown-arrow">▼</div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Enabled</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Auto Stop</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Minimum Damage</div>
+                    <div class="config-settings">
+                        <div class="slider-container">
+                            <div class="slider">
+                                <div class="slider-fill" style="width: 5%;"></div>
+                                <div class="slider-handle" style="left: 5%;"></div>
+                            </div>
+                        </div>
+                        <div>1</div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Hitchance</div>
+                    <div class="config-settings">
+                        <div class="slider-container">
+                            <div class="slider">
+                                <div class="slider-fill" style="width: 0%;"></div>
+                                <div class="slider-handle" style="left: 0%;"></div>
+                            </div>
+                        </div>
+                        <div>Off</div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Target Hitboxes</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="dropdown">
+                            <div class="dropdown-content">
+                                <div>None</div>
+                                <div class="dropdown-arrow">▼</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Multipointed Hitboxes</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="dropdown">
+                            <div class="dropdown-content">
+                                <div>None</div>
+                                <div class="dropdown-arrow">▼</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle functionality
+        document.querySelectorAll('.toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        // Making the sliders interactive
+        const sliders = document.querySelectorAll('.slider');
+        sliders.forEach(slider => {
+            const sliderHandle = slider.querySelector('.slider-handle');
+            const sliderFill = slider.querySelector('.slider-fill');
+            
+            slider.addEventListener('mousedown', function(e) {
+                handleSliderMove(e, slider, sliderHandle, sliderFill);
+                
+                document.addEventListener('mousemove', function moveHandler(e) {
+                    handleSliderMove(e, slider, sliderHandle, sliderFill);
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    document.removeEventListener('mousemove', moveHandler);
+                });
+            });
+        });
+
+        function handleSliderMove(e, slider, handle, fill) {
+            const rect = slider.getBoundingClientRect();
+            let x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+            const percentage = (x / rect.width) * 100;
+            
+            handle.style.left = `${percentage}%`;
+            fill.style.width = `${percentage}%`;
+            
+            // Update the value display if needed
+            const configItem = slider.closest('.config-item');
+            const valueDisplay = configItem.querySelector('.config-settings > div:last-child');
+            
+            if (configItem.querySelector('.config-name').textContent === 'Minimum Damage') {
+                const value = Math.round((percentage / 100) * 100);
+                valueDisplay.textContent = Math.max(1, value);
+            } else if (configItem.querySelector('.config-name').textContent === 'Hitchance') {
+                if (percentage < 5) {
+                    valueDisplay.textContent = 'Off';
+                } else {
+                    const value = Math.round((percentage / 100) * 100);
+                    valueDisplay.textContent = `${value}%`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
