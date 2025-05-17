@@ -9,27 +9,10 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #000;
+            background-color: #0f1016;
             color: #b7b8bc;
             display: flex;
             height: 100vh;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .drag-handle {
-            cursor: move;
-            user-select: none;
-        }
-
-        .cheat-container {
-            display: flex;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            width: auto;
-            height: auto;
-            border-radius: 4px;
-            overflow: hidden;
-            position: absolute;
         }
 
         .sidebar {
@@ -75,12 +58,10 @@
         }
 
         .main-content {
-            background-color: #0f1016;
             flex: 1;
             padding: 20px;
             display: flex;
             flex-direction: column;
-            width: 500px;
         }
 
         .logo-section {
@@ -380,92 +361,173 @@
     </style>
 </head>
 <body>
-    <div class="cheat-container" id="draggable">
-        <div class="sidebar">
-            <div class="sidebar-item active">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12H19M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="sidebar-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2"/>
-                    <path d="M3 12H6M18 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M12 3V6M12 18V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="sidebar-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11Z" stroke="currentColor" stroke-width="2"/>
-                    <path d="M17 7V7C17 4.79086 15.2091 3 13 3H11C8.79086 3 7 4.79086 7 7V11H17V7Z" stroke="currentColor" stroke-width="2"/>
-                </svg>
-            </div>
-            <div class="sidebar-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
-                    <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="sidebar-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 16L16 12L12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8 16L12 12L8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            
-            <div class="sidebar-divider"></div>
-            
-            <div class="sidebar-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.325 4.317C10.751 2.561 13.249 2.561 13.675 4.317C13.7389 4.5808 13.8642 4.82578 14.0407 5.032C14.2172 5.23822 14.4399 5.39985 14.6907 5.50375C14.9414 5.60764 15.2132 5.65085 15.4838 5.62987C15.7544 5.60889 16.0162 5.5243 16.248 5.383C17.791 4.443 19.558 6.209 18.618 7.753C18.4769 7.98466 18.3924 8.24634 18.3715 8.51677C18.3506 8.78721 18.3938 9.05877 18.4975 9.30938C18.6013 9.55999 18.7627 9.78258 18.9687 9.95905C19.1747 10.1355 19.4194 10.2609 19.683 10.325C21.439 10.751 21.439 13.249 19.683 13.675C19.4192 13.7389 19.1742 13.8642 18.968 14.0407C18.7618 14.2172 18.6001 14.4399 18.4963 14.6907C18.3924 14.9414 18.3491 15.2132 18.3701 15.4838C18.3911 15.7544 18.4757 16.0162 18.617 16.248C19.557 17.791 17.791 19.558 16.247 18.618C16.0153 18.4769 15.7537 18.3924 15.4832 18.3715C15.2128 18.3506 14.9412 18.3938 14.6906 18.4975C14.44 18.6013 14.2174 18.7627 14.0409 18.9687C13.8645 19.1747 13.7391 19.4194 13.675 19.683C13.249 21.439 10.751 21.439 10.325 19.683C10.2611 19.4192 10.1358 19.1742 9.95929 18.968C9.7828 18.7618 9.56011 18.6001 9.30935 18.4963C9.05859 18.3924 8.78683 18.3491 8.51621 18.3701C8.24559 18.3911 7.98375 18.4757 7.752 18.617C6.209 19.557 4.442 17.791 5.382 16.247C5.5231 16.0153 5.60755 15.7537 5.62848 15.4832C5.64942 15.2128 5.60624 14.9412 5.50247 14.6906C5.3987 14.44 5.23726 14.2174 5.03127 14.0409C4.82529 13.8645 4.58056 13.7391 4.317 13.675C2.561 13.249 2.561 10.751 4.317 10.325C4.5808 10.2611 4.82578 10.1358 5.032 9.95929C5.23822 9.7828 5.39985 9.56011 5.50375 9.30935C5.60764 9.05859 5.65085 8.78683 5.62987 8.51621C5.60889 8.24559 5.5243 7.98375 5.383 7.752C4.443 6.209 6.209 4.442 7.753 5.382C8.753 5.99 10.049 5.452 10.325 4.317Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="sidebar-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 5H21V19H3V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M3 9H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="sidebar-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 8H6C4.89543 8 4 8.89543 4 10V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V10C20 8.89543 19.1046 8 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M8 8V6C8 4.89543 8.89543 4 10 4H14C15.1046 4 16 4.89543 16 6V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            
-            <div class="sidebar-avatar"></div>
+    <div class="sidebar">
+        <div class="sidebar-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M3 12H6M18 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 3V6M12 18V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M17 7V7C17 4.79086 15.2091 3 13 3H11C8.79086 3 7 4.79086 7 7V11H17V7Z" stroke="currentColor" stroke-width="2"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 16L16 12L12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 16L12 12L8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
         
-        <div class="main-content drag-handle">
-            <div class="logo-section">
-                <div class="logo">α</div>
-                <div class="nav-tabs">
-                    <div class="nav-tab active">Aim Assist</div>
-                    <div class="nav-tab">Anti Aim</div>
-                </div>
+        <div class="sidebar-divider"></div>
+        
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.325 4.317C10.751 2.561 13.249 2.561 13.675 4.317C13.7389 4.5808 13.8642 4.82578 14.0407 5.032C14.2172 5.23822 14.4399 5.39985 14.6907 5.50375C14.9414 5.60764 15.2132 5.65085 15.4838 5.62987C15.7544 5.60889 16.0162 5.5243 16.248 5.383C17.791 4.443 19.558 6.209 18.618 7.753C18.4769 7.98466 18.3924 8.24634 18.3715 8.51677C18.3506 8.78721 18.3938 9.05877 18.4975 9.30938C18.6013 9.55999 18.7627 9.78258 18.9687 9.95905C19.1747 10.1355 19.4194 10.2609 19.683 10.325C21.439 10.751 21.439 13.249 19.683 13.675C19.4192 13.7389 19.1742 13.8642 18.968 14.0407C18.7618 14.2172 18.6001 14.4399 18.4963 14.6907C18.3924 14.9414 18.3491 15.2132 18.3701 15.4838C18.3911 15.7544 18.4757 16.0162 18.617 16.248C19.557 17.791 17.791 19.558 16.247 18.618C16.0153 18.4769 15.7537 18.3924 15.4832 18.3715C15.2128 18.3506 14.9412 18.3938 14.6906 18.4975C14.44 18.6013 14.2174 18.7627 14.0409 18.9687C13.8645 19.1747 13.7391 19.4194 13.675 19.683C13.249 21.439 10.751 21.439 10.325 19.683C10.2611 19.4192 10.1358 19.1742 9.95929 18.968C9.7828 18.7618 9.56011 18.6001 9.30935 18.4963C9.05859 18.3924 8.78683 18.3491 8.51621 18.3701C8.24559 18.3911 7.98375 18.4757 7.752 18.617C6.209 19.557 4.442 17.791 5.382 16.247C5.5231 16.0153 5.60755 15.7537 5.62848 15.4832C5.64942 15.2128 5.60624 14.9412 5.50247 14.6906C5.3987 14.44 5.23726 14.2174 5.03127 14.0409C4.82529 13.8645 4.58056 13.7391 4.317 13.675C2.561 13.249 2.561 10.751 4.317 10.325C4.5808 10.2611 4.82578 10.1358 5.032 9.95929C5.23822 9.7828 5.39985 9.56011 5.50375 9.30935C5.60764 9.05859 5.65085 8.78683 5.62987 8.51621C5.60889 8.24559 5.5243 7.98375 5.383 7.752C4.443 6.209 6.209 4.442 7.753 5.382C8.753 5.99 10.049 5.452 10.325 4.317Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 5H21V19H3V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M3 9H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="sidebar-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 8H6C4.89543 8 4 8.89543 4 10V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V10C20 8.89543 19.1046 8 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 8V6C8 4.89543 8.89543 4 10 4H14C15.1046 4 16 4.89543 16 6V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        
+        <div class="sidebar-avatar"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="logo-section">
+            <div class="logo">α</div>
+            <div class="nav-tabs">
+                <div class="nav-tab active">Aim Assist</div>
+                <div class="nav-tab">Anti Aim</div>
             </div>
-            
-            <div class="config-panels">
-                <div class="config-panel">
+        </div>
+        
+        <div class="config-panels">
+            <div class="config-panel">
+                <div class="panel-header">
+                    <div class="panel-title">General</div>
+                    <div class="panel-dropdown">▼</div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Enabled</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Silent Aim</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Auto Scope</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Force Shoot</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Compensate Spread</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Double Tap</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Duck Peek Assist</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Limit FOV</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Disable Penetration</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="global-overrides">
                     <div class="panel-header">
-                        <div class="panel-title">General</div>
+                        <div class="panel-title">Global Overrides</div>
                         <div class="panel-dropdown">▼</div>
                     </div>
                     
                     <div class="config-item">
-                        <div class="config-name">Enabled</div>
-                        <div class="config-settings">
-                            <div class="settings-icon">⚙</div>
-                            <div class="toggle active">
-                                <div class="toggle-knob"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Silent Aim</div>
+                        <div class="config-name">Override Min. Dmg.</div>
                         <div class="config-settings">
                             <div class="settings-icon">⚙️</div>
                             <div class="toggle active">
@@ -475,16 +537,7 @@
                     </div>
                     
                     <div class="config-item">
-                        <div class="config-name">Auto Scope</div>
-                        <div class="config-settings">
-                            <div class="toggle active">
-                                <div class="toggle-knob"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Force Shoot</div>
+                        <div class="config-name">Override Hitchance</div>
                         <div class="config-settings">
                             <div class="settings-icon">⚙️</div>
                             <div class="toggle active">
@@ -494,7 +547,7 @@
                     </div>
                     
                     <div class="config-item">
-                        <div class="config-name">Compensate Spread</div>
+                        <div class="config-name">Override Hitboxes</div>
                         <div class="config-settings">
                             <div class="settings-icon">⚙️</div>
                             <div class="toggle active">
@@ -502,178 +555,104 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Double Tap</div>
-                        <div class="config-settings">
-                            <div class="toggle active">
-                                <div class="toggle-knob"></div>
-                            </div>
+                </div>
+            </div>
+            
+            <div class="config-panel">
+                <div class="panel-header">
+                    <div class="panel-title">Weapon Selection</div>
+                    <div class="panel-dropdown">▼</div>
+                </div>
+                
+                <div class="dropdown">
+                    <div class="dropdown-content">
+                        <div>General</div>
+                        <div class="dropdown-arrow">▼</div>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Enabled</div>
+                    <div class="config-settings">
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
                         </div>
                     </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Duck Peek Assist</div>
-                        <div class="config-settings">
-                            <div class="toggle active">
-                                <div class="toggle-knob"></div>
-                            </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Auto Stop</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙️</div>
+                        <div class="toggle active">
+                            <div class="toggle-knob"></div>
                         </div>
                     </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Limit FOV</div>
-                        <div class="config-settings">
-                            <div class="settings-icon">⚙️</div>
-                            <div class="toggle active">
-                                <div class="toggle-knob"></div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Minimum Damage</div>
+                    <div class="config-settings">
+                        <div class="slider-container">
+                            <div class="slider">
+                                <div class="slider-fill" style="width: 5%;"></div>
+                                <div class="slider-handle" style="left: 5%;"></div>
                             </div>
                         </div>
+                        <div>1</div>
                     </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Disable Penetration</div>
-                        <div class="config-settings">
-                            <div class="toggle active">
-                                <div class="toggle-knob"></div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Hitchance</div>
+                    <div class="config-settings">
+                        <div class="slider-container">
+                            <div class="slider">
+                                <div class="slider-fill" style="width: 0%;"></div>
+                                <div class="slider-handle" style="left: 0%;"></div>
                             </div>
                         </div>
+                        <div>Off</div>
                     </div>
-                    
-                    <div class="global-overrides">
-                        <div class="panel-header">
-                            <div class="panel-title">Global Overrides</div>
-                            <div class="panel-dropdown">▼</div>
-                        </div>
-                        
-                        <div class="config-item">
-                            <div class="config-name">Override Min. Dmg.</div>
-                            <div class="config-settings">
-                                <div class="settings-icon">⚙️</div>
-                                <div class="toggle active">
-                                    <div class="toggle-knob"></div>
-                                </div>
+                </div>
+                
+                <div class="config-item">
+                    <div class="config-name">Target Hitboxes</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙</div>
+                        <div class="dropdown">
+                            <div class="dropdown-content">
+                                <div>None</div>
+                                <div class="dropdown-arrow">▼</div>
                             </div>
-                        </div>
-                        
-                        <div class="config-item">
-                            <div class="config-name">Override Hitchance</div>
-                            <div class="config-settings">
-                                <div class="settings-icon">⚙️</div>
-                                <div class="toggle active">
-                                    <div class="toggle-knob"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="config-item">
-                            <div class="config-name">Override Hitboxes</div>
-                            <div class="config-settings">
-                                <div class="settings-icon">⚙️</div>
-                                <div class="toggle active">
-                                    <div class="toggle-knob"></div>
-                                </div>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">None</div>
+                                <div class="dropdown-item">Head</div>
+                                <div class="dropdown-item">Chest</div>
+                                <div class="dropdown-item">Stomach</div>
+                                <div class="dropdown-item">Arms</div>
+                                <div class="dropdown-item">Legs</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="config-panel">
-                    <div class="panel-header">
-                        <div class="panel-title">Weapon Selection</div>
-                        <div class="panel-dropdown">▼</div>
-                    </div>
-                    
-                    <div class="dropdown">
-                        <div class="dropdown-content">
-                            <div>General</div>
-                            <div class="dropdown-arrow">▼</div>
-                        </div>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Enabled</div>
-                        <div class="config-settings">
-                            <div class="toggle active">
-                                <div class="toggle-knob"></div>
+                <div class="config-item">
+                    <div class="config-name">Multipointed Hitboxes</div>
+                    <div class="config-settings">
+                        <div class="settings-icon">⚙</div>
+                        <div class="dropdown">
+                            <div class="dropdown-content">
+                                <div>None</div>
+                                <div class="dropdown-arrow">▼</div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Auto Stop</div>
-                        <div class="config-settings">
-                            <div class="settings-icon">⚙️</div>
-                            <div class="toggle active">
-                                <div class="toggle-knob"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Minimum Damage</div>
-                        <div class="config-settings">
-                            <div class="slider-container">
-                                <div class="slider">
-                                    <div class="slider-fill" style="width: 5%;"></div>
-                                    <div class="slider-handle" style="left: 5%;"></div>
-                                </div>
-                            </div>
-                            <div>1</div>
-                        </div>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Hitchance</div>
-                        <div class="config-settings">
-                            <div class="slider-container">
-                                <div class="slider">
-                                    <div class="slider-fill" style="width: 0%;"></div>
-                                    <div class="slider-handle" style="left: 0%;"></div>
-                                </div>
-                            </div>
-                            <div>Off</div>
-                        </div>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Target Hitboxes</div>
-                        <div class="config-settings">
-                            <div class="settings-icon">⚙</div>
-                            <div class="dropdown">
-                                <div class="dropdown-content">
-                                    <div>None</div>
-                                    <div class="dropdown-arrow">▼</div>
-                                </div>
-                                <div class="dropdown-menu">
-                                    <div class="dropdown-item">None</div>
-                                    <div class="dropdown-item">Head</div>
-                                    <div class="dropdown-item">Chest</div>
-                                    <div class="dropdown-item">Stomach</div>
-                                    <div class="dropdown-item">Arms</div>
-                                    <div class="dropdown-item">Legs</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="config-item">
-                        <div class="config-name">Multipointed Hitboxes</div>
-                        <div class="config-settings">
-                            <div class="settings-icon">⚙</div>
-                            <div class="dropdown">
-                                <div class="dropdown-content">
-                                    <div>None</div>
-                                    <div class="dropdown-arrow">▼</div>
-                                </div>
-                                <div class="dropdown-menu">
-                                    <div class="dropdown-item">None</div>
-                                    <div class="dropdown-item">Head</div>
-                                    <div class="dropdown-item">Body</div>
-                                    <div class="dropdown-item">Arms</div>
-                                    <div class="dropdown-item">Legs</div>
-                                    <div class="dropdown-item">All</div>
-                                </div>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">None</div>
+                                <div class="dropdown-item">Head</div>
+                                <div class="dropdown-item">Body</div>
+                                <div class="dropdown-item">Arms</div>
+                                <div class="dropdown-item">Legs</div>
+                                <div class="dropdown-item">All</div>
                             </div>
                         </div>
                     </div>
@@ -683,36 +662,200 @@
     </div>
 
     <script>
-        // Make the menu draggable
-        const draggable = document.getElementById('draggable');
-        const dragHandle = document.querySelector('.drag-handle');
-        
-        let isDragging = false;
-        let offsetX, offsetY;
-        
-        dragHandle.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - draggable.getBoundingClientRect().left;
-            offsetY = e.clientY - draggable.getBoundingClientRect().top;
+        // Toggle functionality
+        document.querySelectorAll('.toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
         });
-        
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                draggable.style.left = (e.clientX - offsetX) + 'px';
-                draggable.style.top = (e.clientY - offsetY) + 'px';
-            }
-        });
-        
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-        
-        // Center the menu initially
-        window.addEventListener('load', () => {
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            const menuWidth = draggable.offsetWidth;
-            const menuHeight = draggable.offsetHeight;
+
+        // Making the sliders interactive
+        const sliders = document.querySelectorAll('.slider');
+        sliders.forEach(slider => {
+            const sliderHandle = slider.querySelector('.slider-handle');
+            const sliderFill = slider.querySelector('.slider-fill');
             
-            draggable.style.left = ((windowWidth - menuWidth) / 2) + 'px';
-            draggable.style.top = ((windowHeight - menuHeight)
+            slider.addEventListener('mousedown', function(e) {
+                handleSliderMove(e, slider, sliderHandle, sliderFill);
+                
+                function moveHandler(e) {
+                    handleSliderMove(e, slider, sliderHandle, sliderFill);
+                }
+                
+                document.addEventListener('mousemove', moveHandler);
+                
+                document.addEventListener('mouseup', function() {
+                    document.removeEventListener('mousemove', moveHandler);
+                });
+            });
+        });
+
+        function handleSliderMove(e, slider, handle, fill) {
+            const rect = slider.getBoundingClientRect();
+            let x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+            const percentage = (x / rect.width) * 100;
+            
+            handle.style.left = `${percentage}%`;
+            fill.style.width = `${percentage}%`;
+            
+            // Update the value display if needed
+            const configItem = slider.closest('.config-item');
+            const valueDisplay = configItem.querySelector('.config-settings > div:last-child');
+            
+            if (configItem.querySelector('.config-name').textContent === 'Minimum Damage') {
+                const value = Math.round((percentage / 100) * 100);
+                valueDisplay.textContent = Math.max(1, value);
+            } else if (configItem.querySelector('.config-name').textContent === 'Hitchance') {
+                if (percentage < 5) {
+                    valueDisplay.textContent = 'Off';
+                } else {
+                    const value = Math.round((percentage / 100) * 100);
+                    valueDisplay.textContent = `${value}%`;
+                }
+            }
+        }
+        
+        // Dropdown functionality
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                // Close all other dropdowns first
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    if (menu !== this.querySelector('.dropdown-menu')) {
+                        menu.classList.remove('open');
+                    }
+                });
+                
+                // If this dropdown has a menu, toggle it
+                const menu = this.querySelector('.dropdown-menu');
+                if (menu) {
+                    menu.classList.toggle('open');
+                    e.stopPropagation();
+                }
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.remove('open');
+            });
+        });
+        
+        // Settings icons functionality (open modals)
+        document.querySelectorAll('.settings-icon').forEach(icon => {
+            icon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                const configName = this.closest('.config-item').querySelector('.config-name').textContent;
+                let modalTitle = configName + ' Settings';
+                let modalContent = '';
+                
+                // Create specific modal content based on which gear icon was clicked
+                if (configName === 'Auto Stop') {
+                    modalContent = `
+                        <div class="modal-option">
+                            <div>Early</div>
+                            <div class="toggle">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                        <div class="modal-option">
+                            <div>Stop</div>
+                            <div class="toggle active">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                        <div class="modal-option">
+                            <div>In Air</div>
+                            <div class="toggle">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    modalContent = `
+                        <div class="modal-option">
+                            <div>Option 1</div>
+                            <div class="toggle">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                        <div class="modal-option">
+                            <div>Option 2</div>
+                            <div class="toggle active">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Create and show modal
+                showModal(modalTitle, modalContent);
+            });
+        });
+        
+        function showModal(title, content) {
+            // Remove any existing modal
+            const existingModal = document.querySelector('.modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Create new modal
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">${title}</div>
+                        <div class="modal-close">×</div>
+                    </div>
+                    <div class="modal-body">
+                        ${content}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-button">Apply</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Show the modal (with animation)
+            setTimeout(() => {
+                modal.classList.add('open');
+            }, 10);
+            
+            // Add event listeners
+            modal.querySelector('.modal-close').addEventListener('click', () => {
+                closeModal(modal);
+            });
+            
+            modal.querySelector('.modal-button').addEventListener('click', () => {
+                closeModal(modal);
+            });
+            
+            // Add toggle functionality to the modal toggles
+            modal.querySelectorAll('.toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+            
+            // Close when clicking outside modal content
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal(modal);
+                }
+            });
+        }
+        
+        function closeModal(modal) {
+            modal.classList.remove('open');
+            setTimeout(() => {
+                modal.remove();
+            }, 200);
+        }
+    </script>
+</body>
+</html>
